@@ -39,6 +39,9 @@ export async function getAllPDFs(): Promise<{
     .select("id, file_name, file_url, title, description, created_at")
     .order("created_at", { ascending: false });
 
-  if (error) return { error: "Error al obtener documentos." };
+  if (error) {
+    console.error("Error al obtener documentos:", error);
+    return { error: "Error al obtener documentos. " + error.message };
+  }
   return { results: data as PDFEmbedding[] };
 }
