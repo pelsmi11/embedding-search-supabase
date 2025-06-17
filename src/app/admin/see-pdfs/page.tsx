@@ -15,11 +15,6 @@ export default function SeePdfsPage() {
     setSearchResults(data?.results ?? []);
   }, [data]);
 
-  console.log({
-    dataDelQuery: data,
-    searchResults,
-  });
-
   const handleSearch = async (query: string) => {
     if (!query.trim()) {
       setSearchResults(data?.results || []);
@@ -27,7 +22,6 @@ export default function SeePdfsPage() {
     }
 
     const result = await searchPDFs(query);
-    console.log({ result });
     if (result?.results) {
       setSearchResults(result.results);
     }
