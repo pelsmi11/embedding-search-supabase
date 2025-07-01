@@ -33,7 +33,7 @@
     "node-fetch": "^3.3.2",
     "openai": "^4.103.0",
     "pdf-parse": "^1.1.1",
-    "pdfjs-dist": "^5.2.133",
+    "pdfjs-dist": "^3.11.174",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.56.4",
