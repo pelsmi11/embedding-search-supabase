@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { PdfViewerModal } from "@/components/PdfViewerModal";
 import {
   useReactTable,
   getCoreRowModel,
@@ -145,21 +146,26 @@ export default function PdfsTable({ data }: PdfsTableProps) {
       header: "Acciones",
       cell: ({ row }) => {
         const pdf = row.original;
-
-        const handleOpenPdf = () => {
-          window.open(pdf.file_url, "_blank");
-        };
+        const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
 
         return (
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleOpenPdf}
-            className="h-8"
-          >
-            <ExternalLink className="mr-2 h-3 w-3" />
-            Ver PDF
-          </Button>
+          <>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsPdfModalOpen(true)}
+              className="h-8"
+            >
+              <ExternalLink className="mr-2 h-3 w-3" />
+              Ver PDF
+            </Button>
+            <PdfViewerModal
+              isOpen={isPdfModalOpen}
+              onOpenChange={setIsPdfModalOpen}
+              fileUrl={pdf.file_url}
+              fileName={pdf.file_name}
+            />
+          </>
         );
       },
     },

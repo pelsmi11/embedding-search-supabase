@@ -92,7 +92,10 @@ export async function uploadAndEmbedPDF(formData: FormData) {
     embedding,
   });
 
-  if (dbError) return { error: "Error al guardar en la base de datos." };
+  if (dbError) {
+    console.error("Error al guardar en la base de datos:", dbError);
+    return { error: "Error al guardar en la base de datos." + dbError.message };
+  }
 
   return { success: true, title, description, url: publicUrl };
 }
