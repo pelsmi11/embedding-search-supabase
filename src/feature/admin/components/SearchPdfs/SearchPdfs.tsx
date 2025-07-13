@@ -58,11 +58,23 @@ export default function SearchPdfs({
             <Input
               placeholder="Buscar por nombre, título o descripción..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyPress={handleKeyPress}
+              onChange={(e) => {
+                if (e.target.value.length <= 250) {
+                  setSearchQuery(e.target.value);
+                }
+              }}
+              onKeyUp={handleKeyPress}
               disabled={isLoading}
               className="h-11"
+              maxLength={250}
+              aria-describedby="search-length-info"
             />
+            <div
+              id="search-length-info"
+              className="text-xs text-right text-muted-foreground mt-1 select-none"
+            >
+              {searchQuery.length}/250 caracteres
+            </div>
           </div>
 
           <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
